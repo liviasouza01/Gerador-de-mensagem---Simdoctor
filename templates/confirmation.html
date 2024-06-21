@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Agenda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e9ecef;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .message {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        .copy-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Confirmação de Agenda - Clínica Braz</h1>
+        <ul>
+            {% for message in messages %}
+                <li>
+                    <span class="message">{{ message }}</span>
+                    <button class="copy-button" onclick="copyToClipboard('{{ message }}')">Copiar</button>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="/" class="back-button">Voltar para a página inicial</a>
+    </div>
+    <div class="footer">
+        Desenvolvido por Lívia Souza
+    </div>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Mensagem copiada: ' + text);
+            }, function(err) {
+                console.error('Erro ao copiar a mensagem: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
