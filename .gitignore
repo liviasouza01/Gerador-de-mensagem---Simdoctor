@@ -135,6 +135,3 @@ dist
 # Arquivos de cache e pycache do Python
 __pycache__/
 *.pyc
-
-# Arquivos de uploads ou diretórios de arquivos estáticos que podem ser gerados
-/static/files/
