@@ -74,6 +74,8 @@ def home():
                     mensagens.append(mensagem)
                     print(f"Enviando para {paciente}: {mensagem}")
 
+        os.remove(file_path)
+
         return render_template('confirmation.html', messages=mensagens)
 
     return render_template('index.html', form=form)
