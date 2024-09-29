@@ -6,24 +6,27 @@
     <title>Upload File</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1a1a2e;
-            color: #f0f0f0;
+            background-color: #1a1a2e; /* Fundo azul marinho */
+            color: #1a1a2e; /* Texto */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             height: 100vh;
+            transition: background-color 0.3s;
         }
         .container {
             text-align: center;
-            background-color: #00C1D4;
+            background-color: rgba(0, 193, 212, 0.9); /* Fundo com transparência para o container */
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra suave */
             margin-bottom: 20px;
+            width: 90%; /* Largura responsiva */
+            max-width: 400px; /* Largura máxima do container */
         }
         .logo {
             margin-bottom: 20px;
@@ -33,35 +36,48 @@
         }
         h1 {
             margin-bottom: 20px;
+            font-size: 24px; 
+            color: #1a1a2e; 
         }
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%; /* Largura completa para o formulário */
         }
         label {
             margin-bottom: 10px;
+            font-size: 16px; 
+            color: #1a1a2e; /* Cor do texto do rótulo */
         }
         input[type="file"] {
             margin-bottom: 20px;
-            padding: 5px;
+            padding: 10px;
+            border: 2px solid #007bff; /* Bordas azuis */
+            border-radius: 5px; /* Bordas arredondadas */
+            transition: border-color 0.3s; /* Efeito de transição para a borda */
+        }
+        input[type="file"]:hover {
+            border-color: #0056b3; /* Muda a cor da borda ao passar o mouse */
         }
         input[type="submit"] {
-            background-color: #1a1a2e;
-            color: #f0f0f0;
+            background-color: #007bff; 
+            color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px; 
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px; 
+            transition: background-color 0.3s; /* Efeito de transição para o fundo */
         }
         input[type="submit"]:hover {
-            background-color: #d63447;
+            background-color: #0056b3; /* Cor do botão ao passar o mouse */
         }
         .footer {
             text-align: center;
             margin-top: 20px;
-            color: #f0f0f0;
+            color: #f0f0f0; /* Texto do rodapé */
             font-size: 14px;
         }
     </style>
@@ -76,11 +92,14 @@
         <form method="POST" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             {{ form.file() }}
+            <label for="{{ form.professional.id }}">Escolha o Profissional:</label>
+            {{ form.professional() }}
             {{ form.submit() }}
-        </form>
+        </form>        
     </div>
     <div class="footer">
         Desenvolvido por Lívia Souza
     </div>
 </body>
 </html>
+

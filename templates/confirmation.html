@@ -15,12 +15,13 @@
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            background-color: white;
+            background-color: #00C1D4; /* Fundo cinza escuro */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px; /* Bordas arredondadas */
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: #1a1a2e; /* Cor azul clara */
         }
         ul {
             list-style-type: none;
@@ -28,16 +29,15 @@
         }
         li {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column; /* Direção em coluna */
             background-color: #e9ecef;
             padding: 10px;
             margin: 10px 0;
             border-radius: 5px;
         }
         .message {
-            flex-grow: 1;
-            margin-right: 10px;
+            margin-bottom: 10px; /* Espaçamento abaixo da mensagem */
+            white-space: pre-line; /* Mantém quebras de linha */
         }
         .copy-button {
             background-color: #007bff;
@@ -47,6 +47,7 @@
             cursor: pointer;
             border-radius: 5px;
             font-size: 14px;
+            align-self: flex-end; /* Alinha o botão à direita */
         }
         .copy-button:hover {
             background-color: #0056b3;
@@ -57,6 +58,20 @@
             font-size: 14px;
             margin-top: 20px;
         }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            color: #1a1a2e; /* Cor do botão de voltar */
+            text-decoration: none; /* Remove o sublinhado */
+            padding: 10px;
+            border: 1px solid #007bff; /* Borda azul */
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #007bff; /* Altera cor de fundo ao passar o mouse */
+            color: white; /* Altera cor do texto ao passar o mouse */
+        }
     </style>
 </head>
 <body>
@@ -65,8 +80,8 @@
         <ul>
             {% for message in messages %}
                 <li>
-                    <span class="message">{{ message }}</span>
-                    <button class="copy-button" onclick="copyToClipboard('{{ message }}')">Copiar</button>
+                    <span class="message">{{ message | safe }}</span> <!-- Usa 'safe' para permitir HTML -->
+                    <button class="copy-button" onclick="copyToClipboard(`{{ message }}`)">Copiar</button> <!-- Ajustado para usar template literal -->
                 </li>
             {% endfor %}
         </ul>
@@ -77,11 +92,14 @@
     </div>
     <script>
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(function() {
-                alert('Mensagem copiada: ' + text);
-            }, function(err) {
-                console.error('Erro ao copiar a mensagem: ', err);
-            });
+            // Usar um elemento temporário para copiar o texto
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy'); // Comando para copiar
+            document.body.removeChild(tempInput); // Remove o elemento após a cópia
+            alert('Mensagem copiada: ' + text); // Alerta de confirmação
         }
     </script>
 </body>
